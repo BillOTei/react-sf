@@ -1,0 +1,15 @@
+services:
+    doctrine.service:
+        class: Service\ObjRelMapper\DoctrineService
+        arguments: ['%doctrine.db%', '%kernel.environment%']
+
+    object_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+        public: false
+        tags:
+            - { name: serializer.normalizer }
+    json_encoder:
+        class: Symfony\Component\Serializer\Encoder\JsonEncoder
+        public: false
+        tags:
+            - { name: serializer.encoder }

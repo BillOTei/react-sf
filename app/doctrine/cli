@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Helper\HelperSet;
+
+/**
+ * Ex:
+ * php app/doctrine/cli orm:generate-entities --no-backup src/
+ * php app/doctrine/cli orm:schema-tool:update --force
+*/
+
+/** @var \Composer\Autoload\ClassLoader $loader */
+$loader = require __DIR__ . '/../../vendor/autoload.php';
+
+$commands = array();
+
+$helperSet = require_once __DIR__ . "/cli-config.php";
+
+if (!($helperSet instanceof HelperSet)) {
+    foreach ($GLOBALS as $helperSetCandidate) {
+        if ($helperSetCandidate instanceof HelperSet) {
+            $helperSet = $helperSetCandidate;
+            break;
+        }
+    }
+}
+
+\Doctrine\ORM\Tools\Console\ConsoleRunner::run($helperSet, $commands);

@@ -1,0 +1,9 @@
+index:
+    path: /
+    defaults: { _controller: AppBundle:Main:index }
+    methods:  [GET]
+
+users:
+    path: /users
+    defaults: { _controller: AppBundle:Main:getUsers }
+    methods:  [GET]
